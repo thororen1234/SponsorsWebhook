@@ -1,0 +1,6 @@
+services:
+  website:
+    image: ghcr.io/thororen1234/sponsorswebhook:latest
+    ports:
+      - "127.0.0.1:1982:1982"
+    restart: unless-stopped
