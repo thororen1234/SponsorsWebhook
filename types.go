@@ -2,6 +2,7 @@ package main
 
 const (
 	ActionTypeCreated             = "created"
+	ActionTypeEdited              = "edited"
 	ActionTypeCancelled           = "cancelled"
 	ActionTypePendingCancellation = "pending_cancellation"
 	ActionTypePendingTierChange   = "pending_tier_change"

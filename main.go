@@ -25,7 +25,7 @@ func sendWebhook(body DiscordWebhookPayload) bool {
 	if len(body.Username) > 80 {
 		body.Username = body.Username[:80]
 	}
-	
+
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(body); err != nil {
 		fmt.Println("Failed to json encode webhook body:", err)
@@ -95,8 +95,9 @@ func handleWebhook(w http.ResponseWriter, req *http.Request) {
 
 	switch sponsorShipEvent.Action {
 	case ActionTypeCreated:
+	case ActionTypeEdited:
 		message.Content = fmt.Sprintf(
-			"New %d$ %s sponsor: %s",
+			"New/Edited %d$ %s sponsor: %s",
 			priceInDollar,
 			sponsorType,
 			sponsorUserLink,
