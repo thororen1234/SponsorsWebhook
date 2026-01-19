@@ -150,6 +150,7 @@ func handleWebhook(w http.ResponseWriter, req *http.Request) {
 	if !succeeded {
 		w.WriteHeader(http.StatusBadGateway)
 		fprintln(w, "Failed to execute webhook")
+		return
 	}
 
 	w.WriteHeader(http.StatusOK)
