@@ -95,9 +95,8 @@ func handleWebhook(w http.ResponseWriter, req *http.Request) {
 
 	switch sponsorShipEvent.Action {
 	case ActionTypeCreated:
-	case ActionTypeEdited:
 		message.Content = fmt.Sprintf(
-			"New/Edited %d$ %s sponsor: %s",
+			"New %d$ %s sponsor: %s",
 			priceInDollar,
 			sponsorType,
 			sponsorUserLink,
