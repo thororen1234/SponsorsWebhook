@@ -93,7 +93,7 @@ func handleWebhook(w http.ResponseWriter, req *http.Request) {
 	}
 	oldPriceInDollar := sponsorShipEvent.Changes.Tier.From.MonthlyPriceInDollars
 	oldSponsorType := "per month"
-	if sponsorShipEvent.Sponsorship.Tier.IsOneTime {
+	if sponsorShipEvent.Changes.Tier.From.IsOneTime {
 		oldSponsorType = "one time"
 	}
 	sponsorUserLink := fmt.Sprintf("[%s](<%s>)", sponsorShipEvent.Sponsorship.Sponsor.UserName, sponsorShipEvent.Sponsorship.Sponsor.HtmlUrl)
@@ -105,6 +105,14 @@ func handleWebhook(w http.ResponseWriter, req *http.Request) {
 			priceInDollar,
 			sponsorType,
 			sponsorUserLink,
+		)
+	case ActionTypeEdited:
+		message.Content = fmt.Sprintf(
+			"%s changed the visibility of their %d$ %s sponsorship to %s",
+			sponsorUserLink,
+			priceInDollar,
+			sponsorType,
+			sponsorShipEvent.Sponsorship.PrivacyLevel,
 		)
 	case ActionTypeCancelled:
 		message.Content = fmt.Sprintf(
